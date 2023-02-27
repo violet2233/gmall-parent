@@ -1,10 +1,7 @@
 package com.code.gmall.product.controller;
 
 import com.code.gmall.common.result.Result;
-import com.code.gmall.model.product.BaseAttrInfo;
-import com.code.gmall.model.product.BaseCategory1;
-import com.code.gmall.model.product.BaseCategory2;
-import com.code.gmall.model.product.BaseCategory3;
+import com.code.gmall.model.product.*;
 import com.code.gmall.product.mapper.BaseCategory1Mapper;
 import com.code.gmall.product.service.ManageService;
 import io.swagger.annotations.Api;
@@ -94,4 +91,31 @@ public class BaseManageController {
     }
 
 
+    /**
+     * 保存-修改平台属性
+     *
+     * @param baseAttrInfo
+     * @return
+     */
+    @PostMapping("saveAttrInfo")
+    @ApiOperation("保存-修改平台属性")
+    public Result saveAttrInfo(@RequestBody BaseAttrInfo baseAttrInfo) {
+        manageService.saveAttrInfo(baseAttrInfo);
+        return Result.ok();
+    }
+
+
+    /**
+     * 根据attrId查询平台属性对象
+     * @param attrId
+     * @return
+     */
+    @GetMapping("getAttrValueList/{attrId}")
+    @ApiOperation("根据attrId查询平台属性对象")
+    public Result<List<BaseAttrValue>> getAttrValueList(@PathVariable Long attrId) {
+        BaseAttrInfo baseAttrInfo = manageService.getAttrInfo(attrId);
+        List<BaseAttrValue> baseAttrValueList = baseAttrInfo.getAttrValueList();
+        return Result.ok(baseAttrValueList);
+
+    }
 }

@@ -1,5 +1,7 @@
 package com.code.gmall.product.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.gmall.model.product.*;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  * @Version v1.0
  */
 
-public interface ManageService {
+public interface ManagerService {
 
     /**
      * 查询所有的一级分类信息
@@ -63,4 +65,13 @@ public interface ManageService {
      * @return
      */
     BaseAttrInfo getAttrInfo(Long attrId);
+
+
+    /**
+     * 根据三级分类查询Spu分页列表
+     * @param spuInfo
+     * @param spuInfoPage
+     * @return
+     */
+    IPage<SpuInfo> getSpuInfoPage(SpuInfo spuInfo, Page<SpuInfo> spuInfoPage);
 }

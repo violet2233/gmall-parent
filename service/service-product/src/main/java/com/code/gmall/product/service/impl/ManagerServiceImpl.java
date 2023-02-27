@@ -1,16 +1,16 @@
 package com.code.gmall.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.code.gmall.common.handler.GlobalExceptionHandler;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.code.gmall.model.product.*;
 import com.code.gmall.product.mapper.*;
-import com.code.gmall.product.service.ManageService;
+import com.code.gmall.product.service.ManagerService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 @Service
-public class ManageServiceImpl implements ManageService {
+public class ManagerServiceImpl implements ManagerService {
 
     @Resource
     private BaseCategory1Mapper baseCategory1Mapper;
@@ -38,6 +38,10 @@ public class ManageServiceImpl implements ManageService {
 
     @Resource
     private BaseAttrValueMapper baseAttrValueMapper;
+
+
+    @Resource
+    private SpuInfoMapper spuInfoMapper;
 
     @Override
     public List<BaseCategory1> getCategory1() {
@@ -116,4 +120,14 @@ public class ManageServiceImpl implements ManageService {
 
         return baseAttrInfo;
     }
+
+    @Override
+    public IPage<SpuInfo> getSpuInfoPage(SpuInfo spuInfo, Page<SpuInfo> spuInfoPage) {
+
+        QueryWrapper<SpuInfo> spuInfoQueryWrapper = new QueryWrapper<>();
+        spuInfoQueryWrapper.eq("category3_id",spuInfo.getCategory3Id());
+        return spuInfoMapper.selectPage(spuInfoPage, spuInfoQueryWrapper);
+
+    }
+
 }

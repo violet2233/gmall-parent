@@ -24,6 +24,7 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("*"); //设置允许访问的网络
         configuration.setAllowCredentials(true); // 设置是否从服务器获取cookie
+
         configuration.addAllowedMethod("*"); // 设置请求方法 * 表示任意
         configuration.addAllowedHeader("*"); // 所有请求头信息 * 表示任意
 
